@@ -1,3 +1,5 @@
+Forked from JavaPoet to gain compatibility with Java 11 / standard javac compiler; project seems hibernated
+
 JavaPoet
 ========
 
