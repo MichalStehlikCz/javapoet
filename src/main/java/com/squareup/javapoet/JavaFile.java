@@ -146,6 +146,23 @@ public final class JavaFile {
     return outputPath;
   }
 
+  /**
+   * Return path (including filename) this will be written to. Can be used to prevent overwriting
+   * existing file
+   *
+   * @param directory root directory for java sources
+   * @return path this file will be written to if writeTo is called
+   */
+  public Path getPath(Path directory) {
+    Path outputDirectory = directory;
+    if (!packageName.isEmpty()) {
+      for (String packageComponent : packageName.split("\\.")) {
+        outputDirectory = outputDirectory.resolve(packageComponent);
+      }
+    }
+    return outputDirectory.resolve(typeSpec.name + ".java");
+  }
+
   /** Writes this to {@code directory} as UTF-8 using the standard directory structure. */
   public void writeTo(File directory) throws IOException {
     writeTo(directory.toPath());
